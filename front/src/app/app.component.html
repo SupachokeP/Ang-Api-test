@@ -1,0 +1,66 @@
+<dx-data-grid
+  *ngIf="orders && orders.length > 0"
+  id="gridContainer"
+  [dataSource]="orders"
+  keyExpr="productId"
+  [showBorders]="true"
+>
+  <dxo-filter-row
+    [visible]="showFilterRow"
+    [applyFilter]="currentFilter"
+  ></dxo-filter-row>
+  <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter>
+  <dxo-search-panel
+    [visible]="true"
+    [width]="240"
+    placeholder="Search..."
+  ></dxo-search-panel>
+  <dxi-column dataField="productId"></dxi-column>
+  <dxi-column dataField="name"></dxi-column>
+  <dxi-column dataField="productGroup"></dxi-column>
+  <dxi-column dataField="supGroup"></dxi-column>
+  <dxi-column dataField="status" cssClass="dx-column-status">
+    <ng-container *dxTemplate="let data of 'cellTemplate'">
+      <div>{{ data.value }}</div>
+    </ng-container>
+  </dxi-column>
+  <dxi-column dataField="qty"></dxi-column>
+  <dxi-column caption="Actions">
+    <ng-template let-data #template>
+      <div class="action-buttons">
+        <button>A</button>
+        <button>I</button>
+        <button>O</button>
+      </div>
+    </ng-template>
+  </dxi-column>
+</dx-data-grid>
+<div class="options">
+  <div class="caption">Options</div>
+  <div class="option">
+    <span>Apply Filter</span>
+    <dx-select-box
+      id="useFilterApplyButton"
+      [inputAttr]="{ 'aria-label': 'Filter' }"
+      [items]="applyFilterTypes"
+      [(value)]="currentFilter"
+      valueExpr="key"
+      displayExpr="name"
+      [disabled]="!showFilterRow"
+    ></dx-select-box>
+  </div>
+  <div class="option">
+    <dx-check-box
+      text="Filter Row"
+      [(value)]="showFilterRow"
+      (onValueChanged)="clearFilter()"
+    ></dx-check-box>
+  </div>
+  <div class="option">
+    <dx-check-box
+      text="Header Filter"
+      [(value)]="showHeaderFilter"
+      (onValueChanged)="clearFilter()"
+    ></dx-check-box>
+  </div>
+</div>

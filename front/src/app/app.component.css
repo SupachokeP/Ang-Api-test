@@ -1,0 +1,73 @@
+::ng-deep #gridContainer {
+  height: 440px;
+}
+
+::ng-deep .options {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: rgba(191, 191, 191, 0.15);
+}
+
+::ng-deep .caption {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+::ng-deep .option {
+  margin-top: 10px;
+}
+
+::ng-deep .option > span {
+  margin-right: 10px;
+}
+
+::ng-deep .option > .dx-selectbox {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Adding custom styles for the data grid column */
+::ng-deep .dx-datagrid .dx-row .dx-column-status {
+  white-space: nowrap; /* Adjust the style as needed */
+  text-align: center;
+}
+
+::ng-deep .dx-datagrid .dx-row .dx-column-status .dx-template-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::ng-deep .dx-datagrid .dx-row .dx-column-status .dx-template-wrapper div {
+  border-radius: 4px;
+  padding: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+
+::ng-deep
+  .dx-datagrid
+  .dx-row
+  .dx-column-status
+  .dx-template-wrapper
+  .status-active {
+  background-color: green;
+}
+
+::ng-deep
+  .dx-datagrid
+  .dx-row
+  .dx-column-status
+  .dx-template-wrapper
+  .status-inactive {
+  background-color: yellow;
+}
+
+::ng-deep
+  .dx-datagrid
+  .dx-row
+  .dx-column-status
+  .dx-template-wrapper
+  .status-delete {
+  background-color: red;
+}

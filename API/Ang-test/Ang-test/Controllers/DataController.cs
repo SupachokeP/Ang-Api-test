@@ -15,7 +15,7 @@ namespace Ang_test.Controllers
         
         private static string connectionString = "Server=(localdb)\\localDB1;Database=Agl_Product;Integrated Security=True;";
 
-        protected SqlConnection GetOpenConnection(string ConnName = null)
+        protected SqlConnection GetOpenConnection()
         {
             SqlConnection connection = null;
             if (!string.IsNullOrEmpty(connectionString))
@@ -36,9 +36,8 @@ namespace Ang_test.Controllers
             {
                 StringBuilder sQuery = new StringBuilder();
                 sQuery.Append(@" SELECT  *  FROM TBM_Product_New with(nolock)");
-
                 data = dbConnection.Query<ProductRes>(sQuery.ToString()).ToList();
-                }
+            }
             catch (Exception)
             {
 

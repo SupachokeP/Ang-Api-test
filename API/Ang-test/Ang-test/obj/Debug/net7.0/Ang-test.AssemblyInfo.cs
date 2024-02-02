@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ang-test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+995b4f593b5f94122745ecf55676739915df055d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ang-test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ang-test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
