@@ -22,4 +22,9 @@ namespace Ang_test
         public string Status { get; set; }
         public string Qty { get; set; }
     }
+    public class ProductUpdateModel
+    {
+        public string Status { get; set; }
+        public string ProductId { get; set; }
+    }
 }

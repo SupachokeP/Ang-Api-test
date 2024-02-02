@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Ang-Api-test\\API\\Ang-test\\Ang-test\\Ang-test.csproj": {}
+    "C:\\Users\\idtim\\Desktop\\Coding\\angulartest\\Ang-Api-test\\API\\Ang-test\\Ang-test\\Ang-test.csproj": {}
   },
   "projects": {
-    "D:\\Ang-Api-test\\API\\Ang-test\\Ang-test\\Ang-test.csproj": {
+    "C:\\Users\\idtim\\Desktop\\Coding\\angulartest\\Ang-Api-test\\API\\Ang-test\\Ang-test\\Ang-test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Ang-Api-test\\API\\Ang-test\\Ang-test\\Ang-test.csproj",
+        "projectUniqueName": "C:\\Users\\idtim\\Desktop\\Coding\\angulartest\\Ang-Api-test\\API\\Ang-test\\Ang-test\\Ang-test.csproj",
         "projectName": "Ang-test",
-        "projectPath": "D:\\Ang-Api-test\\API\\Ang-test\\Ang-test\\Ang-test.csproj",
-        "packagesPath": "C:\\Users\\SupachokeBoonsiriwit\\.nuget\\packages\\",
-        "outputPath": "D:\\Ang-Api-test\\API\\Ang-test\\Ang-test\\obj\\",
+        "projectPath": "C:\\Users\\idtim\\Desktop\\Coding\\angulartest\\Ang-Api-test\\API\\Ang-test\\Ang-test\\Ang-test.csproj",
+        "packagesPath": "C:\\Users\\idtim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\idtim\\Desktop\\Coding\\angulartest\\Ang-Api-test\\API\\Ang-test\\Ang-test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\SupachokeBoonsiriwit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\idtim\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -62,17 +62,16 @@ namespace Ang_test.Controllers
             }
         }
         [HttpPut("UpdateProduct")]
-        public IActionResult UpdateProduct(ProductRes product)
+        public IActionResult UpdateProduct(ProductUpdateModel updateModel)
         {
             using (IDbConnection dbConnection = GetOpenConnection())
             {
                 try
                 {
                     string query = @"UPDATE TBM_Product_New
-                                 SET Name = @Name, ProductGroup = @ProductGroup, SupGroup = @SupGroup,
-                                     Status = @Status, Qty = @Qty
-                                 WHERE ProductId = @ProductId";
-                    dbConnection.Execute(query, product);
+                             SET Status = @Status
+                             WHERE ProductId = @ProductId";
+                    dbConnection.Execute(query, updateModel);
                     return Ok("Product updated successfully");
                 }
                 catch (Exception ex)

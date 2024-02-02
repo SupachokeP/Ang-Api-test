@@ -28,14 +28,14 @@ export class Service {
 }
 @Injectable()
 export class DataService {
-  private UpdateUrl = 'http://localhost:5219/api/Data/UpdateStatus';
+  private UpdateUrl = 'http://localhost:5219/api/Data/UpdateProduct';
 
   constructor(private http: HttpClient) {}
 
-  updateStatus(productId: any): Observable<any> {
-    console.log('helloworld');
-    const url = `${this.UpdateUrl}/updatestatus`;
-    const body = { Status: 'Active', ProductId: productId }; // Modify as per your needs
-    return this.http.post(url, body);
+  updateStatus(productId: any, status: any): Observable<any> {
+    console.log(status);
+    const url = `${this.UpdateUrl}`;
+    const body = { productId, status };
+    return this.http.put(url, body);
   }
 }

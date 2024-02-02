@@ -17,7 +17,11 @@ import {
   DxCheckBoxModule,
   DxButtonModule,
 } from 'devextreme-angular';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Order, Service, DataService } from './app.service';
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
@@ -68,16 +72,73 @@ export class AppComponent implements OnInit {
       this.cdr.detectChanges(); // Manually trigger change detection
     });
   }
-  onAButtonClick(productId: any): void {
-    // Call the API when the "A" button is clicked
-    this.dataService.updateStatus(productId).subscribe(
+  private refreshData(): void {
+    this.service.getOrders().subscribe(
+      (data) => {
+        this.orders = data;
+      },
+      (error) => {
+        console.error('Error fetching orders:', error);
+      }
+    );
+  }
+  onAButtonClick(event: any): void {
+    const productId = event?.row?.data?.productId;
+    const status = 'Active';
+
+    this.dataService.updateStatus(productId, status).subscribe({
+      next: (response) => {
+        console.log('Status updated successfully:', response);
+        console.log('fetch data');
+        this.refreshData();
+      },
+      error: (error) => {
+        console.error('Error updating status:', error);
+        this.refreshData();
+      },
+      complete: () => {
+        console.log('Subscription completed');
+      },
+    });
+  }
+
+  onIButtonClick(event: any): void {
+    console.log(event);
+    const productId = event?.row?.data?.productId;
+    const status = 'Inactive';
+    console.log(productId);
+    this.dataService.updateStatus(productId, status).subscribe(
       (response) => {
         console.log('Status updated successfully:', response);
-        // Handle success (e.g., show a success message)
+        console.log('fetch data');
+        this.refreshData();
       },
       (error) => {
         console.error('Error updating status:', error);
-        // Handle error (e.g., show an error message)
+        this.refreshData();
+      },
+      () => {
+        console.log('Subscription completed');
+      }
+    );
+  }
+  onDButtonClick(event: any): void {
+    console.log(event);
+    const productId = event?.row?.data?.productId;
+    const status = 'Delete';
+    console.log(productId);
+    this.dataService.updateStatus(productId, status).subscribe(
+      (response) => {
+        console.log('Status updated successfully:', response);
+        console.log('fetch data');
+        this.refreshData();
+      },
+      (error) => {
+        console.error('Error updating status:', error);
+        this.refreshData();
+      },
+      () => {
+        console.log('Subscription completed');
       }
     );
   }
@@ -113,6 +174,7 @@ export class AppComponent implements OnInit {
     this.dataGrid.instance.clearFilter();
   }
 }
+
 @NgModule({
   imports: [
     BrowserModule,

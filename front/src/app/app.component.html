@@ -21,12 +21,12 @@
   <dxi-column dataField="supGroup"></dxi-column>
   <dxi-column dataField="status"></dxi-column>
   <dxi-column dataField="qty"></dxi-column>
-  <dxi-column cellTemplate="cellTemplate" type="buttons" caption="Button">
-  </dxi-column>
-
-  <div *dxTemplate="let data of 'cellTemplate'">
-    <button (click)="okClicked($event)">test</button>
-  </div>
+  <dxi-column cellTemplate="cellTemplate" type="buttons" caption="Actions">
+    <div *dxTemplate="let data of 'cellTemplate'">
+      <dx-button text="A" (click)="onAButtonClick(data)"> </dx-button>
+      <dx-button text="I" (click)="onIButtonClick(data)"> </dx-button>
+      <dx-button text="D" (click)="onDButtonClick(data)"> </dx-button></div
+  ></dxi-column>
 </dx-data-grid>
 <div class="options">
   <div class="caption">Options</div>
