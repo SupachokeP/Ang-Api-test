@@ -26,3 +26,16 @@ export class Service {
     return this.http.get<Order[]>(this.apiUrl);
   }
 }
+@Injectable()
+export class DataService {
+  private UpdateUrl = 'http://localhost:5219/api/Data/UpdateStatus';
+
+  constructor(private http: HttpClient) {}
+
+  updateStatus(productId: any): Observable<any> {
+    console.log('helloworld');
+    const url = `${this.UpdateUrl}/updatestatus`;
+    const body = { Status: 'Active', ProductId: productId }; // Modify as per your needs
+    return this.http.post(url, body);
+  }
+}

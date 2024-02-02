@@ -26,26 +26,79 @@ namespace Ang_test.Controllers
 
             return connection;
         }
-    
+
         [HttpGet("GetProductData")]
-        public List<ProductRes> GetSomething()
+        public async Task<IActionResult> GetProductData()
         {
-            var data = new List<ProductRes>();
-            using (IDbConnection dbConnection = GetOpenConnection())
             try
             {
-                StringBuilder sQuery = new StringBuilder();
-                sQuery.Append(@" SELECT  *  FROM TBM_Product_New with(nolock)");
-                data = dbConnection.Query<ProductRes>(sQuery.ToString()).ToList();
+                using (IDbConnection dbConnection = GetOpenConnection())
+                {
+                    var data = await dbConnection.QueryAsync<ProductRes>("SELECT * FROM TBM_Product_New with(nolock)");
+                    return Ok(data.ToList());
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return StatusCode(500, "An error occurred while fetching product data.");
             }
-
-            return data;
         }
+        [HttpPost("AddProduct")]
+        public IActionResult AddProduct(ProductRes product)
+        {
+            using (IDbConnection dbConnection = GetOpenConnection())
+            {
+                try
+                {
+                    string query = @"INSERT INTO TBM_Product_New (ProductId, Name, ProductGroup, SupGroup, Status, Qty)
+                                 VALUES (@ProductId, @Name, @ProductGroup, @SupGroup, @Status, @Qty)";
+                    dbConnection.Execute(query, product);
+                    return Ok("Product added successfully");
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error adding product: {ex.Message}");
+                }
+            }
+        }
+        [HttpPut("UpdateProduct")]
+        public IActionResult UpdateProduct(ProductRes product)
+        {
+            using (IDbConnection dbConnection = GetOpenConnection())
+            {
+                try
+                {
+                    string query = @"UPDATE TBM_Product_New
+                                 SET Name = @Name, ProductGroup = @ProductGroup, SupGroup = @SupGroup,
+                                     Status = @Status, Qty = @Qty
+                                 WHERE ProductId = @ProductId";
+                    dbConnection.Execute(query, product);
+                    return Ok("Product updated successfully");
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error updating product: {ex.Message}");
+                }
+            }
+        }
+        [HttpDelete("DeleteProduct/{productId}")]
+        public IActionResult DeleteProduct(string productId)
+        {
+            using (IDbConnection dbConnection = GetOpenConnection())
+            {
+                try
+                {
+                    string query = @"DELETE FROM TBM_Product_New WHERE ProductId = @ProductId";
+                    dbConnection.Execute(query, new { ProductId = productId });
+                    return Ok("Product deleted successfully");
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error deleting product: {ex.Message}");
+                }
+            }
+        }
+
     }
 
 }

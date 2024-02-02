@@ -19,21 +19,14 @@
   <dxi-column dataField="name"></dxi-column>
   <dxi-column dataField="productGroup"></dxi-column>
   <dxi-column dataField="supGroup"></dxi-column>
-  <dxi-column dataField="status" cssClass="dx-column-status">
-    <ng-container *dxTemplate="let data of 'cellTemplate'">
-      <div>{{ data.value }}</div>
-    </ng-container>
-  </dxi-column>
+  <dxi-column dataField="status"></dxi-column>
   <dxi-column dataField="qty"></dxi-column>
-  <dxi-column caption="Actions">
-    <ng-template let-data #template>
-      <div class="action-buttons">
-        <button>A</button>
-        <button>I</button>
-        <button>O</button>
-      </div>
-    </ng-template>
+  <dxi-column cellTemplate="cellTemplate" type="buttons" caption="Button">
   </dxi-column>
+
+  <div *dxTemplate="let data of 'cellTemplate'">
+    <button (click)="okClicked($event)">test</button>
+  </div>
 </dx-data-grid>
 <div class="options">
   <div class="caption">Options</div>

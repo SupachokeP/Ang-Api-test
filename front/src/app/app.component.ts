@@ -15,16 +15,18 @@ import {
   DxDataGridModule,
   DxSelectBoxModule,
   DxCheckBoxModule,
+  DxButtonModule,
 } from 'devextreme-angular';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Order, Service } from './app.service';
+import { Order, Service, DataService } from './app.service';
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
 }
 import { ChangeDetectorRef } from '@angular/core';
+import notify from 'devextreme/ui/notify';
 @Component({
   selector: 'demo-app',
-  providers: [Service],
+  providers: [Service, DataService],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   preserveWhitespaces: true,
@@ -40,7 +42,11 @@ export class AppComponent implements OnInit {
   saleAmountHeaderFilter: any;
   currentFilter: any;
 
-  constructor(private service: Service, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private service: Service,
+    private cdr: ChangeDetectorRef,
+    private dataService: DataService
+  ) {}
 
   ngOnInit(): void {
     this.showFilterRow = true;
@@ -62,16 +68,21 @@ export class AppComponent implements OnInit {
       this.cdr.detectChanges(); // Manually trigger change detection
     });
   }
-  handleActiveClick(data: any) {
-    // Handle "Active" button click
+  onAButtonClick(productId: any): void {
+    // Call the API when the "A" button is clicked
+    this.dataService.updateStatus(productId).subscribe(
+      (response) => {
+        console.log('Status updated successfully:', response);
+        // Handle success (e.g., show a success message)
+      },
+      (error) => {
+        console.error('Error updating status:', error);
+        // Handle error (e.g., show an error message)
+      }
+    );
   }
-
-  handleInactiveClick(data: any) {
-    // Handle "Inactive" button click
-  }
-
-  handleOtherClick(data: any) {
-    // Handle "Other" button click
+  okClicked(event: any) {
+    console.log(event);
   }
   getStatusButtonColor(status: string, targetStatus: string): string {
     return status === targetStatus ? 'green' : 'dimgray';
@@ -91,7 +102,9 @@ export class AppComponent implements OnInit {
         return '';
     }
   }
-
+  doneClick() {
+    notify('The Done button was clicked');
+  }
   private static getOrderDay(orderDate: string | number | Date) {
     return new Date(orderDate).getDay();
   }
@@ -104,6 +117,7 @@ export class AppComponent implements OnInit {
   imports: [
     BrowserModule,
     BrowserTransferStateModule,
+    DxButtonModule,
     DxDataGridModule,
     DxSelectBoxModule,
     DxCheckBoxModule,
